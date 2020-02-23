@@ -10,19 +10,14 @@ namespace ASP.NET_backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class UserController : ControllerBase
     {
 
         private readonly BoskarssonContext _context;
 
-        public WeatherForecastController(BoskarssonContext context) {
+        public UserController(BoskarssonContext context) {
             _context = context;
         }
-
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         [HttpGet]
         public ContentResult Get()

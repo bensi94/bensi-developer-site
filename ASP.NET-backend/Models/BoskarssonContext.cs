@@ -17,7 +17,6 @@ namespace ASP.NET_backend.Models
 
         public virtual DbSet<User> User { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(entity =>
