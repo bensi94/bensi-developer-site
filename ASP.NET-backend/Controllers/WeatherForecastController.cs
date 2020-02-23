@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ASP.NET_backend.Models;
 
 namespace ASP.NET_backend.Controllers
 {
@@ -11,29 +12,23 @@ namespace ASP.NET_backend.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+
+        private readonly BoskarssonContext _context;
+
+        public WeatherForecastController(BoskarssonContext context) {
+            _context = context;
+        }
+
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public ContentResult Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            User user = _context.User.Find(1);
+            return Content(user.Email);
         }
     }
 }

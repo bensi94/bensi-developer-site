@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using ASP.NET_backend.Models;
+
 
 namespace ASP.NET_backend
 {
@@ -26,6 +29,8 @@ namespace ASP.NET_backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<BoskarssonContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("BoskarssonDBConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
